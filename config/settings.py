@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-!)0dsqboh2-fsfrj2=ko!&79f(c!de=#h_94c3m2ovjuoq#5xg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "chips-conf-performer-sheriff.trycloudflare.com",
+]
 
 
 # Application definition
@@ -132,3 +136,7 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/administrador/login/'
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://chips-conf-performer-sheriff.trycloudflare.com",
+]
