@@ -1,0 +1,166 @@
+
+{% extends 'quiz/base.html' %}
+
+{% block title %}Panel administrativo{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+    <div class="panel-titulo">
+
+        <div>
+            <span class="etiqueta">ADMINISTRACIÓN</span>
+
+            <h1>Resultados de participantes</h1>
+
+            <p>
+                Seguimiento de los resultados del juego ambiental.
+            </p>
+        </div>
+
+        <a href="{% url 'administrador_logout' %}"
+           class="boton-secundario">
+            Cerrar sesión
+        </a>
+
+    </div>
+
+    <!-- ESTADÍSTICAS -->
+
+    <div class="estadisticas">
+
+        <div class="estadistica">
+            <span>Total participantes</span>
+            <strong>{{ total }}</strong>
+        </div>
+
+        <div class="estadistica">
+            <span>Juegos finalizados</span>
+            <strong>{{ finalizados }}</strong>
+        </div>
+
+        <div class="estadistica">
+            <span>Promedio de puntos</span>
+            <strong>{{ promedio }}/8</strong>
+        </div>
+
+    </div>
+
+    <!-- TABLA DE PARTICIPANTES -->
+
+    <div class="tabla-card">
+
+        <div class="tabla-titulo">
+
+            <h2>Listado de participantes</h2>
+
+            <!-- EXPORTAR EXCEL -->
+
+            <a href="{% url 'exportar' %}"
+               class="boton-exportar">
+                EXPORTAR A EXCEL
+            </a>
+
+        </div>
+
+        <div class="tabla-scroll">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Identificación</th>
+                        <th>Cargo</th>
+                        <th>Puntaje</th>
+                        <th>Estado</th>
+                        <th>Respuestas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for p in participantes %}
+
+                    <tr>
+
+                        <td>{{ p.nombre }}</td>
+
+                        <td>{{ p.identificacion }}</td>
+
+                        <td>{{ p.cargo }}</td>
+
+                        <td>
+                            <strong>{{ p.puntaje }}/8</strong>
+                        </td>
+
+                        <td>
+
+                            {% if p.finalizado %}
+
+                                <span class="estado-ok">
+                                    Finalizado
+                                </span>
+
+                            {% else %}
+
+                                <span class="estado-pendiente">
+                                    En curso
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <!-- VER RESPUESTAS -->
+
+                        <td>
+                            <a href="{% url 'detalle' p.id %}">
+                                VER DETALLE
+                            </a>
+                        </td>
+
+                        <!-- ELIMINAR PARTICIPANTE -->
+
+                        <td>
+
+                            <form method="POST"
+                                  action="{% url 'eliminar_participante' p.id %}"
+                                  onsubmit="return confirm('¿Estás seguro de eliminar a este participante y todas sus respuestas? Esta acción no se puede deshacer.');">
+
+                                {% csrf_token %}
+
+                                <button type="submit"
+                                        class="boton-eliminar">
+                                    ELIMINAR
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="7">
+                            Todavía no hay participantes.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

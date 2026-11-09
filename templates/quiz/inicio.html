@@ -1,0 +1,115 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}Inicio - Juego Ambiental{% endblock %}
+
+{% block content %}
+
+<section class="portada">
+
+    <div class="portada-texto">
+
+        <span class="etiqueta">RETO AMBIENTAL</span>
+
+        <h1>
+            ¿Qué tanto sabes sobre el cuidado de nuestro planeta?
+        </h1>
+
+        <p>
+            Participa en este juego educativo y demuestra
+            tus conocimientos sobre el cambio climático,
+            el ahorro del agua y la conservación ambiental.
+        </p>
+
+        <div class="datos-juego">
+
+            <span>🌎 8 preguntas</span>
+
+            <span>💧 Cultura del agua</span>
+
+            <span>🌱 Naturaleza</span>
+
+        </div>
+
+    </div>
+
+    <div class="ilustracion">
+        🌳
+    </div>
+
+</section>
+
+
+<section class="formulario-card">
+
+    <div class="titulo-formulario">
+
+        <span>01</span>
+
+        <div>
+
+            <h2>Identificación del participante</h2>
+
+            <p>
+                Ingresa tus datos para comenzar.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form method="POST" action="{% url 'jugar' %}">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="registro" value="si">
+
+
+        <label>Nombre completo *</label>
+
+        <input
+            type="text"
+            name="nombre"
+            placeholder="Nombres y apellidos"
+            maxlength="150"
+            required
+        >
+
+
+        <label>Número de identificación *</label>
+
+        <input
+            type="text"
+            name="identificacion"
+            placeholder="Número de documento"
+            maxlength="40"
+            required
+        >
+
+
+        <label>Cargo que ocupa *</label>
+
+        <input
+            type="text"
+            name="cargo"
+            placeholder="Ej. Secretario, funcionario, contratista"
+            maxlength="120"
+            required
+        >
+
+
+        <button type="submit" class="boton-principal">
+
+            COMENZAR JUEGO →
+
+        </button>
+
+        <small class="nota">
+            Todos los campos son obligatorios.
+        </small>
+
+    </form>
+
+</section>
+
+{% endblock %}

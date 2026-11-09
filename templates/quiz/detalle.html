@@ -1,0 +1,116 @@
+
+{% extends 'quiz/base.html' %}
+
+{% block title %}Detalle de respuestas{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+    <a href="{% url 'panel' %}" class="volver">
+        ← VOLVER AL PANEL
+    </a>
+
+    <div class="tabla-card">
+
+        <span class="etiqueta">RESULTADOS INDIVIDUALES</span>
+
+        <h1>{{ participante.nombre }}</h1>
+
+        <p>
+            <strong>Identificación:</strong>
+            {{ participante.identificacion }}
+        </p>
+
+        <p>
+            <strong>Cargo:</strong>
+            {{ participante.cargo }}
+        </p>
+
+        <h2>
+            Puntaje obtenido:
+            {{ participante.puntaje }}/8
+        </h2>
+
+        {% if participante.finalizado %}
+            <span class="estado-ok">Juego finalizado</span>
+        {% else %}
+            <span class="estado-pendiente">Juego en curso</span>
+        {% endif %}
+
+    </div>
+
+    <div class="tabla-card">
+
+        <h2>Revisión de las respuestas</h2>
+
+        {% for r in respuestas %}
+
+            <div class="respuesta-admin">
+
+                <h3>
+                    Pregunta {{ r.numero_pregunta }}
+                </h3>
+
+                <p>
+                    <strong>{{ r.pregunta }}</strong>
+                </p>
+
+                <div class="respuesta-usuario">
+
+                    <strong>Respuesta seleccionada:</strong>
+
+                    <p>
+                        {{ r.respuesta_usuario }}.
+                        {{ r.texto_respuesta }}
+                    </p>
+
+                </div>
+
+                <div class="respuesta-correcta">
+
+                    <strong>Respuesta correcta:</strong>
+
+                    <p>
+                        {{ r.respuesta_correcta }}.
+                        {{ r.texto_respuesta_correcta }}
+                    </p>
+
+                </div>
+
+                {% if r.correcta %}
+
+                    <span class="estado-ok">
+                        RESPUESTA CORRECTA
+                    </span>
+
+                {% else %}
+
+                    <span class="estado-error">
+                        RESPUESTA INCORRECTA
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            <hr>
+
+        {% empty %}
+
+            <p>
+                Este participante todavía no tiene respuestas
+                registradas.
+            </p>
+
+        {% endfor %}
+
+        <p>
+            Total de preguntas respondidas: {{ respuestas|length }}/8
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

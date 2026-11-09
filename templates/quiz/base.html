@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#103e32">
+
+    <title>
+        {% block title %}Juego Educativo Ambiental{% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'quiz/css/estilos.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="encabezado">
+
+    <div class="contenedor-header">
+
+        <div class="logo-superior">
+
+            <img
+                src="{% static 'quiz/img/escudo.png' %}"
+                alt="Logo institucional"
+                onerror="this.style.display='none'"
+            >
+
+            <span>ESPACIO PARA LOGO</span>
+
+        </div>
+
+        <div class="titulo-header">
+
+            <small>EDUCACIÓN Y CULTURA AMBIENTAL</small>
+
+            <h2>Guardianes de la Naturaleza</h2>
+
+            <p>Agua · Biodiversidad · Cambio climático</p>
+
+        </div>
+
+        <div class="icono-header">🌿</div>
+
+    </div>
+
+</header>
+
+
+<main class="contenido">
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="mensaje">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="contenedor-footer">
+
+        <img
+            src="{% static 'quiz/img/footer.png' %}"
+            alt="Logo institucional horizontal"
+            onerror="this.style.display='none'"
+        >
+
+        <p>
+            Comprometidos con el cuidado del agua y la vida.
+        </p>
+
+    </div>
+
+</footer>
+<script src="{% static 'quiz/js/juego.js' %}"></script>
+</body>
+
+</html>

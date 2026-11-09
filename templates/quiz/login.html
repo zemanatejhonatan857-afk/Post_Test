@@ -1,0 +1,62 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}Acceso administrativo{% endblock %}
+
+{% block content %}
+
+<section class="login-card">
+
+    <span class="etiqueta">
+        ACCESO RESTRINGIDO
+    </span>
+
+    <h1>Panel administrativo</h1>
+
+    <p>
+        Ingresa tus credenciales para consultar
+        los resultados de los participantes.
+    </p>
+
+
+    {% if error %}
+
+        <div class="mensaje">
+            {{ error }}
+        </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Usuario</label>
+
+        <input
+            type="text"
+            name="usuario"
+            required
+        >
+
+
+        <label>Contraseña</label>
+
+        <input
+            type="password"
+            name="password"
+            required
+        >
+
+
+        <button class="boton-principal" type="submit">
+
+            INGRESAR
+
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

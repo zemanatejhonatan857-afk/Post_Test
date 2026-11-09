@@ -1,0 +1,58 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}Resultado final{% endblock %}
+
+{% block content %}
+
+<section class="resultado-card">
+
+    <div class="resultado-icono">
+        🌿
+    </div>
+
+    <span class="etiqueta">
+        RETO COMPLETADO
+    </span>
+
+    <h1>
+        ¡Gracias por participar!
+    </h1>
+
+    <p>
+        {{ participante.nombre }},
+        has terminado el juego educativo ambiental.
+    </p>
+
+
+    <div class="puntaje">
+
+        <strong>
+            {{ participante.puntaje }}
+        </strong>
+
+        <span>
+            DE 8 PUNTOS
+        </span>
+
+    </div>
+
+
+    <p class="mensaje-final">
+
+        Cada acción cuenta.
+
+        Sigamos protegiendo el agua,
+        los árboles y nuestra biodiversidad.
+
+    </p>
+
+
+    <a href="{% url 'inicio' %}" class="boton-principal">
+
+        VOLVER AL INICIO
+
+    </a>
+
+</section>
+
+{% endblock %}

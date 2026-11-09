@@ -1,0 +1,100 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %}Pregunta {{ numero }}{% endblock %}
+
+{% block content %}
+
+<section class="juego">
+
+    <div class="juego-superior">
+
+        <span class="etiqueta">RETO AMBIENTAL</span>
+
+        <strong>
+            PREGUNTA {{ numero }} / {{ total }}
+        </strong>
+    </div>
+
+
+    <div class="barra-progreso">
+
+        <div style="width:{{ progreso }}%"></div>
+
+    </div>
+
+
+    <div class="pregunta-card">
+
+        <span class="numero-pregunta">
+            0{{ numero }}
+        </span>
+
+        <h1>
+            {{ pregunta.pregunta }}
+        </h1>
+
+        <p class="instruccion">
+            Selecciona una sola respuesta.
+        </p>
+
+
+        {% if error %}
+
+            <p class="mensaje">{{ error }}</p>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="opciones">
+
+                {% for letra, opcion in pregunta.opciones.items %}
+
+                    <label class="opcion">
+
+                        <input
+                            type="radio"
+                            name="respuesta"
+                            value="{{ letra }}"
+                            required
+                        >
+
+                        <span class="letra">
+                            {{ letra }}
+                        </span>
+
+                        <span class="texto-opcion">
+                            {{ opcion }}
+                        </span>
+
+                    </label>
+
+                {% endfor %}
+
+            </div>
+
+
+            <button type="submit" class="boton-principal">
+
+                {% if numero == total %}
+                    FINALIZAR JUEGO →
+                {% else %}
+                    SIGUIENTE PREGUNTA →
+                {% endif %}
+
+            </button>
+
+        </form>
+
+        <p class="nota">
+            Tu resultado se mostrará al finalizar.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
